@@ -156,15 +156,15 @@ vec2 mainSound(float time) {
   mx += vec2(dist(k, 20.00)) * .4;
 
   // Hi Hat
-  mx += hat(tb) * 1.2;
-  mx.y += hat(tb * 4.2) * 1.2;
+  // mx += hat(tb) * 1.2;
+  // mx.y += hat(tb * 4.2) * 1.2;
 
   // Crash
   float s2i = 1.0 - smoothstep(0.01, 0.0, abs(mod(time * 12.0, 256.0) - 64.0 - 128.0) - 64.0);
   mx += expl(mod(time * 12.0, 64.0) / 4.5) * 0.4 * s2i;
 
   // Clap
-  mx.x += clap(tb) * .45;
+  // mx.x += clap(tb) * .45;
 
   vec2 s = vec2(mx);
 
@@ -182,5 +182,5 @@ vec2 mainSound(float time) {
   // float crush = 4.;
   // s = floor(s * crush) / crush;
 
-  return s;
+  return s * .5;
 }
