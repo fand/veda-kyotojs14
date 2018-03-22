@@ -2,17 +2,21 @@ precision mediump float;
 uniform float time;
 uniform vec2 resolution;
 
-void main() {
-  vec2 uv = gl_FragCoord.xy / resolution;
-  float tb = mod((time + gl_FragCoord.x * .01 + 3.7) * 12., 16.) / 16.;
-  float amp = (1. - fract(tb * 4.));
-  amp*=amp;
+vec2 rot(in vec2 uv, in float t) {
+    float c = cos(t), s = sin(t);
+    return mat2(c, -s, s, c) * uv;
+}
 
-  gl_FragColor = vec4(0,0,0,1);
-  // if (uv.y < 0.5) {
-  //   gl_FragColor.b = tb;
-  // } else {
-  //   gl_FragColor.g = amp;
-  // }
-  // gl_FragColor.r = fract(time / 10.66666667);
+void main() {
+    vec2 p = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
+
+    p = p * (length(p) + sin(time * 1.4) - .2);
+    p = rot(p + .1, time + sin(time + (length(p) + 3.) * 7.) * .4);
+
+    gl_FragColor = vec4(
+        sin(p.x * 20. + sin(p.y * 3. + time + 0.)) + cos(p.y * 30. + sin(p.x * 7. + time)),
+        sin(p.x * 20. + sin(p.y * 3. + time + 1.)) + cos(p.y * 30. + sin(p.x * 7. + time)),
+        sin(p.x * 20. + sin(p.y * 3. + time + 2.)) + cos(p.y * 30. + sin(p.x * 7. + time)),
+        1
+    );
 }
