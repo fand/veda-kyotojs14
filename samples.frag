@@ -88,9 +88,9 @@ vec2 mainSound(float time) {
     s += crash(time) * .35;
     s += kick(time) * .33;
     s += snare(time) * .3;
-    s += up(time) * .25;
-    s.x += amen(time).x * .3;
-    s.y += hat(time).x * .15;
+    // s += up(time) * .25;
+    // s.x += amen(time).x * .3;
+    // s.y += hat(time).x * .15;
 
     return s;
 }
