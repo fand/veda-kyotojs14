@@ -10,8 +10,9 @@ vec2 rot(in vec2 uv, in float t) {
 void main() {
     vec2 p = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
-    p = p * (length(p) + sin(time * 1.4) - .2);
-    p = rot(p + .1, time + sin(time + (length(p) + 3.) * 7.) * .4);
+    p = p * (length(p) + sin(time * 1.4) - .5);
+    // p = rot(p + .1, time + sin(time + (length(p) + 3.) * 7.) * .4);
+    p = rot(p + .2, time + sin(length(p) * 20.) * .2);
 
     gl_FragColor = vec4(
         sin(p.x * 20. + sin(p.y * 3. + time + 0.)) + cos(p.y * 30. + sin(p.x * 7. + time)),
